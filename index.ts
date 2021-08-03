@@ -183,3 +183,25 @@ class BarCreateThenShrink {
         this.curr.startUpdating(cb)
     }
 }
+
+class Renderer {
+
+    bcts : BarCreateThenShrink = new BarCreateThenShrink()
+    animator : Animator = new Animator()
+
+    render(context : CanvasRenderingContext2D) {
+        this.bcts.draw(context)
+    }
+
+    handleTap(cb : Function) {
+        this.bcts.startUpdating(() => {
+            this.animator.start(() => {
+                cb()
+                this.bcts.update(() => {
+                    this.animator.stop()
+                    cb()
+                })
+            })
+        })
+    }
+}

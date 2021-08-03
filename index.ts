@@ -24,3 +24,22 @@ class ScaleUtil {
         return Math.min(1 / n, ScaleUtil.maxScale(scale, i, n)) * n 
     }
 }
+
+class DrawingUtil {
+    
+    static drawBarCreateThenShrink(context : CanvasRenderingContext2D,  scale : number) {
+        const size : number = Math.min(w, h) / sizeFactor
+        const shrinkSize : number = Math.min(w, h) / shrinkSizeFactor
+        const sc1 : number = ScaleUtil.divideScale(scale, 0, parts)
+        const sc2 : number = ScaleUtil.divideScale(scale, 1, parts)
+        const sc3 : number = ScaleUtil.divideScale(scale, 2, parts)
+        context.save()
+        context.fillRect(w * sc3, 0, w * (sc1 - sc3), size - (size - shrinkSize) * sc2)
+        context.restore()
+    }
+
+    static drawBCTSNode(context : CanvasRenderingContext2D, i : number, scale : number) {
+        context.fillStyle = colors[i]
+        DrawingUtil.drawBarCreateThenShrink(context, scale)
+    }
+}

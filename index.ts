@@ -33,6 +33,7 @@ class DrawingUtil {
         const sc1 : number = ScaleUtil.divideScale(scale, 0, parts)
         const sc2 : number = ScaleUtil.divideScale(scale, 1, parts)
         const sc3 : number = ScaleUtil.divideScale(scale, 2, parts)
+        console.log("Scale", sc1, sc2, sc3)
         context.save()
         context.fillRect(w * sc3, 0, w * (sc1 - sc3), size - (size - shrinkSize) * sc2)
         context.restore()
